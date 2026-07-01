@@ -1,0 +1,13 @@
+_analysis_images/
+_canmv_backup/
+_canmv_debug/
+_open_source/
+*.zip
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.pyc
+__pycache__/
+build/
+dist/
