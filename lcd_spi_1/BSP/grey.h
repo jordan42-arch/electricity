@@ -17,6 +17,7 @@ void Get_Huidu(void);
 
 
 extern uint8_t Huidu_Flag;//灰度类型标志，原Huidu_Datas
+extern uint8_t Huidu_Pattern;//7路灰度原始位图，非0表示至少一路检测到黑线
 /*IR
 *0:非法状态
 *1：单线(仅连续两路获一路识别到)

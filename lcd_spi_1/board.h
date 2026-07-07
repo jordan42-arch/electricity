@@ -56,7 +56,8 @@ typedef enum {
         STATE_A_END // 回到A点结束状态
 } RunModeState;
 
-extern bool alarm_enabled;
+extern volatile bool alarm_enabled;
+extern volatile uint16_t alarm_timer_count;
 
 #define u8  unsigned char
 #define u16 unsigned int

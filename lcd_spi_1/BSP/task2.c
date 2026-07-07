@@ -24,6 +24,7 @@ void task2(void){
     int circle_count = 0;
     int sure = 0;//确认运动键
     int turn_f = 0;//转弯阶段判断
+    int turn_direction = 0;//-1:左转，1:右转，0:未识别
 
 
     //Trc_begin(50, 400);
@@ -46,18 +47,60 @@ void task2(void){
             else if (turn_f == 1) {//转弯前减速
                 Car_Tracing(50);
                 if (Huidu_Flag == 3) {
-                    SET_MOTORS_SPEED(0, 0);
-                    delay_ms(500);
+                    turn_direction = -1;
+                    Reset_Distance();
+                    turn_f = 2;
+                }
+                else if (Huidu_Flag == 2) {
+                    turn_direction = 1;
                     Reset_Distance();
                     turn_f = 2;
                 }
             }
             else if (turn_f == 2) {//稳定转弯通过后，切换为直线阶段
-                SET_MOTORS_SPEED(-40, 40);
-                if (Huidu_Flag == 1 || Motor2_Lucheng >= 15) {
+                float left_distance =
+                    Motor1_Lucheng < 0 ? -Motor1_Lucheng : Motor1_Lucheng;
+                float right_distance =
+                    Motor2_Lucheng < 0 ? -Motor2_Lucheng : Motor2_Lucheng;
+                float turn_distance =
+                    (left_distance + right_distance) / 2.0f;
+                int turn_speed;
+
+                if (turn_distance < 2) {
+                    turn_speed = 60;
+                }
+                else if (turn_distance < 20) {
+                    turn_speed = 35;
+                }
+                else {
+                    turn_speed = 20;
+                }
+
+                if (turn_direction < 0) {
+                    SET_MOTORS_SPEED(-turn_speed, turn_speed);
+                }
+                else if (turn_direction > 0) {
+                    SET_MOTORS_SPEED(turn_speed, -turn_speed);
+                }
+                else {
+                    SET_MOTORS_SPEED(0, 0);
+                }
+
+                if ((turn_distance >= 4 &&
+                     Huidu_Flag == 1 &&
+                     Huidu_Error >= -2 &&
+                     Huidu_Error <= 2)) {
                     Reset_Distance();
                     turn_f = 3;
+                    turn_direction = 0;
                     circle_count++;//每次转弯后圈数计数加一
+                }
+                else if (turn_distance >= 40) {
+                    SET_MOTORS_SPEED(0, 0);
+                    Reset_Distance();
+                    turn_f = 0;
+                    turn_direction = 0;
+                    sure = 0;
                 }
             }
             else if (turn_f == 3) {//稳定转弯通过后，先低速回正

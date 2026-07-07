@@ -63,6 +63,7 @@ static const DeviationPattern validPatterns[] = {
 // 上一次的有效偏移值
 static int8_t lastValidDeviation = 0;
 uint8_t Huidu_Flag;
+uint8_t Huidu_Pattern;
 int8_t Huidu_Target = 0;
 int8_t Huidu_Error;
 
@@ -89,6 +90,7 @@ void Get_Huidu(void)
             pattern |= (1 << (6 - i));  // 构建 7 位模式
         }
     }
+    Huidu_Pattern = pattern;
 
     // 检查是否为合法模式
     Huidu_Flag = 0;

@@ -16,16 +16,29 @@
 #include "task2.h"
 #include "task3.h"
 #include "task4.h"
+#include "task5.h"
 #include "encoder.h"
 #include <stdint.h>
 #include <stdio.h>
+
+static void LCD_ClearMenuScreen(void)
+{
+    uint16_t x;
+    uint16_t y;
+
+    for (y = 0; y < LCD_H; y += 16) {
+        for (x = 0; x < LCD_W; x += 8) {
+            LCD_ShowChar(x, y, ' ', WHITE, WHITE, 16, 0);
+        }
+    }
+}
 
 int main(void)
 {
 	 
 	//初始化
     SYSCFG_DL_init();
-    LED1_ON();
+    LED1_OFF();
 	// Development board initialization
 	board_init();
     // 初始化电机
@@ -35,29 +48,18 @@ int main(void)
     //imu初始化
     calibrate_z_axis_zero();
     // LCD Initializatio
-    delay_ms(300);   // ⭐关键：等系统完全稳定
-
-// ⭐关键：强制LCD复位（必须）
-    DL_GPIO_clearPins(RES_PORT, RES_PIN_20_PIN);
-    delay_ms(50);
-
-    DL_GPIO_setPins(RES_PORT, RES_PIN_20_PIN);
-    delay_ms(50);
-
-// ⭐关键：再次延时（防止SPI时序错位）
-    delay_ms(100);
 	LCD_Init();
     LCD_Fill(0,0,LCD_W,LCD_H,WHITE);	
     LCD_ShowString(10,20,"Gogogo",BLACK,WHITE,16,0);
      //任务列表，任务计数器
-    const uint8_t task_count = 6;
-    void (*tasks[])(void) = {test_1, test_2, task1, task2, task3, task4};
+    const uint8_t task_count = 7;
+    void (*tasks[])(void) = {test_1, test_2, task1, task2, task3, task4, task5};
     uint8_t current_task_index = 0;
     uint8_t last_current_task_index = 0;
 
 	char buf_index[32];
-            sprintf(buf_index, "test: %d\r\n", current_task_index+1); // 将值转换为字符串
-            LCD_Fill(0,0,LCD_W,LCD_H,WHITE);	
+            sprintf(buf_index, "test: %d", current_task_index+1); // 将值转换为字符串
+            LCD_ClearMenuScreen();
             LCD_ShowString(10, 30, buf_index, BLACK, WHITE, 16, 0); // 显示字符串
 
 	while (1)
@@ -91,14 +93,14 @@ int main(void)
             switch (current_task_index) {
                 case 0:
                 case 1:
-                    sprintf(buf_index, "test: %d\r\n", current_task_index + 1);
+                    sprintf(buf_index, "test: %d", current_task_index + 1);
                     break;
                 default:
-                    sprintf(buf_index, "task: %d\r\n", current_task_index - 1);
+                    sprintf(buf_index, "task: %d", current_task_index - 1);
                     break;
             }
                         
-            LCD_Fill(0,0,LCD_W,LCD_H,WHITE);	
+            LCD_ClearMenuScreen();
             LCD_ShowString(10, 30, buf_index, BLACK, WHITE, 16, 0); // 显示字符串
         }
     }     
@@ -108,7 +110,6 @@ int main(void)
 void TIMER_0_INST_IRQHandler(void) {
     static uint16_t count_10ms = 0;
     static uint16_t count_100ms = 0;
-    static uint16_t alarm_timer_count = 0;
     switch (DL_TimerA_getPendingInterrupt(TIMER_0_INST)) {
         case DL_TIMERA_IIDX_LOAD:
         //循迹计时

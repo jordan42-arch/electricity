@@ -12,7 +12,7 @@ uint8_t page_flag =0;//翻页防抖
 void board_init(void)
 {
 	// SYSCFG初始化 SYSCFG Initialization
-	SYSCFG_DL_init();
+	//SYSCFG_DL_init();
 	//清除串口中断标志 Clear the serial port interrupt flag
 	NVIC_ClearPendingIRQ(UART_0_INST_INT_IRQN);
 	//使能串口中断 Enable serial port interrupt
@@ -36,9 +36,11 @@ void board_init(void)
 
 //声光提示
 //关闭设置在定时器中
-bool alarm_enabled = 0;
+volatile bool alarm_enabled = 0;
+volatile uint16_t alarm_timer_count = 0;
 void Start_Alarm(void)
 {
+    alarm_timer_count = 0;
     alarm_enabled = 1;
     LED1_ON();
     BEEP_ON();

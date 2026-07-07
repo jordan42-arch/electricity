@@ -51,7 +51,7 @@
 #define LCD_DC_Set()   DL_GPIO_setPins(DC_PORT,DC_PIN_24_PIN)
  		     
 #define LCD_CS_Clr()   DL_GPIO_clearPins(CS_PORT,CS_PIN_23_PIN)//CS
-#define LCD_CS_Set()  DL_GPIO_clearPins(CS_PORT,CS_PIN_23_PIN) //DL_GPIO_setPins(CS_PORT,CS_PIN_23_PIN)
+#define LCD_CS_Set()  DL_GPIO_setPins(CS_PORT,CS_PIN_23_PIN) //DL_GPIO_setPins(CS_PORT,CS_PIN_23_PIN)
 
 #define LCD_BLK_Clr()  DL_GPIO_clearPins(BLK_PORT,BLK_PIN_19_PIN)//BLK
 #define LCD_BLK_Set()  DL_GPIO_setPins(BLK_PORT,BLK_PIN_19_PIN)

@@ -8,6 +8,7 @@
 #ifndef TASK4_H
 #define TASK4_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
@@ -26,6 +27,13 @@ extern "C" {
  * 按下K2键可退出任务
  */
 void task4(void);
+
+/**
+ * @brief Load the straight-line motor bases learned by task4.
+ *
+ * @return true when a valid calibration record exists in internal flash.
+ */
+bool task4_load_straight_calibration(int *left_base, int *right_base);
 
 #ifdef __cplusplus
 }
