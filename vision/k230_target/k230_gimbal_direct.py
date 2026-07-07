@@ -24,19 +24,33 @@ HEIGHT = 240
 CENTER_X = WIDTH // 2
 CENTER_Y = HEIGHT // 2
 
+# Final laser aiming note:
+# The gimbal should ultimately align the detected target center with the
+# laser spot in the camera image, not necessarily the image center. The laser
+# wire is currently broken, so offset calibration is left for later. After the
+# laser is repaired, turn it on briefly, observe its fixed image offset from
+# the camera center, and set AIM_OFFSET_X/Y accordingly.
+AIM_OFFSET_X = 0
+AIM_OFFSET_Y = 0
+AIM_X = CENTER_X + AIM_OFFSET_X
+AIM_Y = CENTER_Y + AIM_OFFSET_Y
+
 RUN_FRAMES = 0
 SERVO_UPDATE_MS = 80
 PRINT_INTERVAL_MS = 100
-FILTER_OLD = 5
+FILTER_OLD = 7
 FILTER_NEW = 1
 LOST_RESET_FRAMES = 10
-STARTUP_HOLD_MS = 800
-STABLE_FRAMES_BEFORE_MOVE = 5
-MAX_TRACK_ERROR_X = 115
-MAX_TRACK_ERROR_Y = 85
+STARTUP_HOLD_MS = 300
+STABLE_FRAMES_BEFORE_MOVE = 2
+MAX_TRACK_ERROR_X = 140
+MAX_TRACK_ERROR_Y = 105
 
-ENABLE_IDE_PREVIEW = True
+ENABLE_IDE_PREVIEW = False
 ENABLE_LASER_WHEN_LOCKED = False
+ENABLE_PAN_SERVO = False
+ENABLE_TILT_SERVO = True
+REQUIRE_FRAME_CENTER_FOR_MOVE = True
 LOCK_DEADBAND_PX = 10
 LOCK_FRAMES_REQUIRED = 12
 
@@ -61,20 +75,20 @@ PAN_DIR = -1
 PAN_KP_US_PER_PX = 0.45
 PAN_KD_US_PER_PX = 0.05
 
-TILT_CENTER_US = 2100
-TILT_MIN_US = 700
-TILT_MAX_US = 2400
+TILT_CENTER_US = 1500
+TILT_MIN_US = 1200
+TILT_MAX_US = 1800
 TILT_DIR = -1
-TILT_KP_US_PER_PX = 0.42
-TILT_KD_US_PER_PX = 0.05
+TILT_KP_US_PER_PX = 0.50
+TILT_KD_US_PER_PX = 0.06
 
-MAX_PAN_STEP_US = 5
-MAX_TILT_STEP_US = 5
-PAN_DEADBAND_PX = 14
+MAX_PAN_STEP_US = 2
+MAX_TILT_STEP_US = 3
+PAN_DEADBAND_PX = 16
 TILT_DEADBAND_PX = 12
-PAN_ERROR_CONFIRM_FRAMES = 2
-TILT_ERROR_CONFIRM_FRAMES = 3
-AXIS_NO_IMPROVE_FRAMES = 8
+PAN_ERROR_CONFIRM_FRAMES = 1
+TILT_ERROR_CONFIRM_FRAMES = 1
+AXIS_NO_IMPROVE_FRAMES = 24
 AXIS_IMPROVE_MARGIN_PX = 2
 
 WHITE_THRESHOLDS = (
@@ -111,6 +125,13 @@ MIN_RED_ANCHOR_BLOBS = 3
 MIN_RED_ANCHOR_W = 18
 MIN_RED_ANCHOR_H = 18
 
+MIN_TARGET_RED_PIXELS = 18
+MIN_TARGET_RED_BLOBS = 1
+MIN_TARGET_RED_W = 8
+MIN_TARGET_RED_H = 8
+MAX_RED_CENTER_JUMP_PX = 55
+A4_CENTER_OK_PX = 18
+
 
 def clamp(v, lo, hi):
     if v < lo:
@@ -118,6 +139,10 @@ def clamp(v, lo, hi):
     if v > hi:
         return hi
     return v
+
+
+def target_error(cx, cy):
+    return cx - AIM_X, cy - AIM_Y
 
 
 def us_to_duty(pulse_us):
@@ -149,6 +174,20 @@ class Servo:
             self.pwm.deinit()
         except Exception:
             pass
+
+
+class DisabledServo:
+    def __init__(self, center_us):
+        self.us = center_us
+
+    def write_us(self, pulse_us):
+        self.us = int(pulse_us)
+
+    def add_us(self, delta_us):
+        pass
+
+    def deinit(self):
+        pass
 
 
 def order_corners(points):
@@ -303,6 +342,50 @@ def red_anchor_stats(red_blobs):
     }
 
 
+def choose_red_target(img):
+    red_blobs = find_red_blobs(img)
+    x1 = WIDTH
+    y1 = HEIGHT
+    x2 = 0
+    y2 = 0
+    total = 0
+    count = 0
+    wx = 0
+    wy = 0
+
+    for b in red_blobs:
+        if b.pixels() < 1:
+            continue
+        # Ignore blobs touching the image edge; partial outer rings bias the
+        # center badly when the target is only half in view.
+        if b.x() <= 1 or b.y() <= 1:
+            continue
+        if b.x() + b.w() >= WIDTH - 1 or b.y() + b.h() >= HEIGHT - 1:
+            continue
+        x1 = min(x1, b.x())
+        y1 = min(y1, b.y())
+        x2 = max(x2, b.x() + b.w() - 1)
+        y2 = max(y2, b.y() + b.h() - 1)
+        total += b.pixels()
+        count += 1
+        wx += b.cx() * b.pixels()
+        wy += b.cy() * b.pixels()
+
+    if total < MIN_TARGET_RED_PIXELS or count < MIN_TARGET_RED_BLOBS:
+        return None
+    w = x2 - x1 + 1
+    h = y2 - y1 + 1
+    if w < MIN_TARGET_RED_W or h < MIN_TARGET_RED_H:
+        return None
+
+    cx = wx // total
+    cy = wy // total
+    corners = ((x1, y1), (x2, y1), (x2, y2), (x1, y2))
+    conf = total * 120 + count * 600 + w * h
+    dx, dy = target_error(cx, cy)
+    return dx, dy, conf, "RED_TARGET", corners
+
+
 def black_border_score(black_blobs, rect):
     x, y, w, h = rect
     strips = (
@@ -358,6 +441,32 @@ def choose_black_frame(img):
         if score > best_score:
             best = (corners, (x, y, w, h), r.magnitude() + red_px)
             best_score = score
+    if best is None:
+        black_blobs = find_black_blobs(img)
+        for b in black_blobs:
+            if b.w() < MIN_FRAME_W or b.h() < MIN_FRAME_H:
+                continue
+            if b.x() <= 2 or b.y() <= 2:
+                continue
+            if b.x() + b.w() >= WIDTH - 2 or b.y() + b.h() >= HEIGHT - 2:
+                continue
+            if b.w() > 170 or b.h() > 230:
+                continue
+            aspect = b.w() * 100 // max(1, b.h())
+            if aspect < 35 or aspect > 90:
+                continue
+            if abs(b.cx() - CENTER_X) > 105 or abs(b.cy() - CENTER_Y) > 100:
+                continue
+            x1 = b.x()
+            y1 = b.y()
+            x2 = b.x() + b.w() - 1
+            y2 = b.y() + b.h() - 1
+            corners = ((x1, y1), (x2, y1), (x2, y2), (x1, y2))
+            score = b.pixels() * 20 + b.w() * b.h()
+            score -= abs(b.cx() - CENTER_X) * 6 + abs(b.cy() - CENTER_Y) * 3
+            if score > best_score:
+                best = (corners, (x1, y1, b.w(), b.h()), score)
+                best_score = score
     return best
 
 
@@ -495,20 +604,29 @@ def detect_target(img):
     if frame is not None:
         corners, frame_roi, conf = frame
         cx, cy = diagonal_center(corners)
-        return cx - CENTER_X, cy - CENTER_Y, conf, "FRAME_CENTER", corners
+        dx, dy = target_error(cx, cy)
+        return dx, dy, conf, "FRAME_CENTER", corners
 
     paper = choose_white_blob(img)
-    if paper is None:
-        return None
+    if paper is not None:
+        corners = choose_paper_rect(img, paper)
+        label = "PAPER_CENTER"
+        if corners is None:
+            corners = bbox_corners(paper)
+            label = "PAPER_BBOX"
+        cx, cy = diagonal_center(corners)
+        dx, dy = target_error(cx, cy)
+        return dx, dy, paper.pixels(), label, corners
 
-    corners = choose_paper_rect(img, paper)
-    label = "PAPER_CENTER"
-    if corners is None:
-        corners = bbox_corners(paper)
-        label = "PAPER_BBOX"
+    red_target = choose_red_target(img)
+    if red_target is not None:
+        dx, dy, conf, label, corners = red_target
+        tx = CENTER_X + dx
+        ty = CENTER_Y + dy
+        dx, dy = target_error(tx, ty)
+        return dx, dy, conf, "RED_FALLBACK", corners
 
-    cx, cy = diagonal_center(corners)
-    return cx - CENTER_X, cy - CENTER_Y, paper.pixels(), label, corners
+    return None
 
 
 def filtered_value(old, new):
@@ -551,17 +669,19 @@ def update_axis_guard(err_px, deadband_px, best_abs, no_improve_count):
 
 
 def draw_debug(img, result, pan_us, tilt_us):
-    img.draw_cross(CENTER_X, CENTER_Y, color=(255, 255, 0), size=14)
-    img.draw_circle(CENTER_X, CENTER_Y, 5, color=(255, 255, 0))
+    img.draw_cross(AIM_X, AIM_Y, color=(255, 255, 0), size=14)
+    img.draw_circle(AIM_X, AIM_Y, 5, color=(255, 255, 0))
+    if AIM_X != CENTER_X or AIM_Y != CENTER_Y:
+        img.draw_cross(CENTER_X, CENTER_Y, color=(128, 128, 128), size=8)
     if result is None:
         img.draw_string_advanced(0, 0, 12, "NO TARGET", color=(255, 0, 0))
         return
     dx, dy, conf, label, corners = result
-    tx = CENTER_X + dx
-    ty = CENTER_Y + dy
+    tx = AIM_X + dx
+    ty = AIM_Y + dy
     img.draw_cross(tx, ty, color=(0, 255, 0), size=16)
     img.draw_circle(tx, ty, 6, color=(0, 255, 0), thickness=2)
-    img.draw_line(tx, ty, CENTER_X, CENTER_Y, color=(0, 0, 255), thickness=2)
+    img.draw_line(tx, ty, AIM_X, AIM_Y, color=(0, 0, 255), thickness=2)
     for i in range(4):
         x1, y1 = corners[i]
         x2, y2 = corners[(i + 1) % 4]
@@ -573,6 +693,8 @@ def draw_debug(img, result, pan_us, tilt_us):
 def main():
     print("K230_GIMBAL_DIRECT_START")
     print("PAN GPIO52/PIN33 PWM4, TILT GPIO42/PIN35 PWM0, RELAY GPIO32/PIN37")
+    print("IDE_PREVIEW=%d, FRAME=%dx%d" % (1 if ENABLE_IDE_PREVIEW else 0, WIDTH, HEIGHT))
+    print("SERVO_ENABLE pan=%d tilt=%d" % (1 if ENABLE_PAN_SERVO else 0, 1 if ENABLE_TILT_SERVO else 0))
 
     sensor = None
     pan = None
@@ -609,22 +731,30 @@ def main():
 
         fpioa = FPIOA()
         fpioa.set_function(RELAY_GPIO, FPIOA.GPIO32)
-        fpioa.set_function(PAN_GPIO, PAN_PWM_FUNC)
-        fpioa.set_function(TILT_GPIO, TILT_PWM_FUNC)
+        if ENABLE_PAN_SERVO:
+            fpioa.set_function(PAN_GPIO, PAN_PWM_FUNC)
+        if ENABLE_TILT_SERVO:
+            fpioa.set_function(TILT_GPIO, TILT_PWM_FUNC)
 
         relay = Pin(RELAY_GPIO, Pin.OUT, value=1 - RELAY_ACTIVE_LEVEL)
-        pan = Servo(PAN_PWM_CH, PAN_CENTER_US, PAN_MIN_US, PAN_MAX_US)
-        tilt = Servo(TILT_PWM_CH, TILT_CENTER_US, TILT_MIN_US, TILT_MAX_US)
+        if ENABLE_PAN_SERVO:
+            pan = Servo(PAN_PWM_CH, PAN_CENTER_US, PAN_MIN_US, PAN_MAX_US)
+        else:
+            pan = DisabledServo(PAN_CENTER_US)
+        if ENABLE_TILT_SERVO:
+            tilt = Servo(TILT_PWM_CH, TILT_CENTER_US, TILT_MIN_US, TILT_MAX_US)
+        else:
+            tilt = DisabledServo(TILT_CENTER_US)
 
         sensor = Sensor(id=SENSOR_ID, fps=30)
         sensor.reset()
         sensor.set_framesize(width=WIDTH, height=HEIGHT, chn=CAM_CHN_ID_0)
         sensor.set_pixformat(Sensor.RGB565, chn=CAM_CHN_ID_0)
+        if ENABLE_IDE_PREVIEW:
+            Display.init(Display.VIRT, width=WIDTH, height=HEIGHT, to_ide=True)
         MediaManager.init()
         sensor.run()
         time.sleep_ms(600)
-
-        Display.init(Display.VIRT, width=WIDTH, height=HEIGHT, to_ide=True)
 
         while RUN_FRAMES == 0 or frame_id < RUN_FRAMES:
             os.exitpoint()
@@ -667,7 +797,8 @@ def main():
                     last_servo_ms = now
                     can_move = (
                         stable_count >= STABLE_FRAMES_BEFORE_MOVE and
-                        time.ticks_diff(now, start_ms) >= STARTUP_HOLD_MS
+                        time.ticks_diff(now, start_ms) >= STARTUP_HOLD_MS and
+                        (not REQUIRE_FRAME_CENTER_FOR_MOVE or result[3] == "FRAME_CENTER")
                     )
                     move_enabled = 1 if can_move else 0
                     if can_move:
@@ -757,10 +888,11 @@ def main():
                 sensor.stop()
         except Exception as e:
             print("sensor stop err", e)
-        try:
-            Display.deinit()
-        except Exception:
-            pass
+        if ENABLE_IDE_PREVIEW:
+            try:
+                Display.deinit()
+            except Exception:
+                pass
         try:
             MediaManager.deinit()
         except Exception as e:
