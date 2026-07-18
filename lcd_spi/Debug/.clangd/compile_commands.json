@@ -1,0 +1,92 @@
+[
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/car_control.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/encoder.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/grey.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/imu.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/k210_use.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/key.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/lcd.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/lcd_init.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/motor.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/task1.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/task2.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/task4.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/test.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug/ti_msp_dl_config.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/board.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/empty.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/task3.c"
+   },
+   {
+      "directory" : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug",
+      "command"   : "clang++ -D__MSPM0G3507__ -D__USE_SYSCONFIG__ -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/Debug\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source/third_party/CMSIS/Core/Include\" -I\"C:/ti/mspm0_sdk_2_10_00_04/source\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP\" -I\"C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/eMPL\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c++/v1\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/lib/clang/18/include\" -isystem\"C:/ti/ti_cgt_arm_llvm_4.0.2.LTS/include/c\" -xc",
+      "file"      : "C:/Users/Sbtaanre/workspace_ccstheia/New_v3/lcd_spi_1/BSP/task5.c"
+   }
+]
